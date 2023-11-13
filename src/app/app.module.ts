@@ -7,16 +7,9 @@ import { TodoModule } from './todos/todo.module';
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FooterComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    TodoModule
-  ],
+  declarations: [AppComponent, FooterComponent],
+  imports: [BrowserModule, AppRoutingModule, TodoModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

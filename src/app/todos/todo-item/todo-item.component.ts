@@ -32,6 +32,7 @@ constructor(private store: Store<AppState>){}
   //se activa con doble click y selecciona todo el texto
   editar(){
     this.editando = true
+    this.txtnput.setValue(this.todo.texto)
 
     setTimeout(() => {
       this.txtInputFisico.nativeElement.select()
@@ -42,5 +43,13 @@ constructor(private store: Store<AppState>){}
   //termina la edición seteando el editado en false, y se usa blur para desactiva la edicion del doble click
   terminarEdicion(){
     this.editando = false
+
+    if(this.txtnput.invalid) return
+    if(this.txtnput.value === this.todo.texto) return
+
+    this.store.dispatch(actions.editar({
+      id: this.todo.id,
+      texto: this.txtnput.value
+    }))
   }
 }

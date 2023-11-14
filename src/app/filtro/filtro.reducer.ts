@@ -8,6 +8,6 @@ const _filtroReducer = createReducer<filtrosValidos, Action>(
   on(setFiltro, (state, { filtro }) => filtro)
 );
 
-export function todoReducer(state = initialState, action: Action) {
+export function filtroReducer(state = initialState, action: Action) {
   return _filtroReducer(state, action);
 }

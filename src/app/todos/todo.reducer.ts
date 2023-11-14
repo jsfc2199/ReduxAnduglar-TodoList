@@ -4,7 +4,9 @@ import { Todo } from './models/todo.model';
 
 
 export const initialState: Todo[] = [
-  new Todo('Salvar al mundo')
+  new Todo('Salvar al mundo'),
+  new Todo('Vencer a thano'),
+  new Todo('Robar escudo del capitan america'),
 ];
 
 const _todoReducer = createReducer(

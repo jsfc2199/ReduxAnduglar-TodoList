@@ -52,4 +52,8 @@ constructor(private store: Store<AppState>){}
       texto: this.txtnput.value
     }))
   }
+
+  onEliminar(){
+    this.store.dispatch(actions.borrar({id:this.todo.id}))
+  }
 }

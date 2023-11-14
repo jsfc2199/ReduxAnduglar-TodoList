@@ -1,8 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Todo } from '../models/todo.model';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-todo-item',
   templateUrl: './todo-item.component.html',
   styleUrls: ['./todo-item.component.css'],
 })
-export class TodoItemComponent {}
+export class TodoItemComponent implements OnInit {
+  @Input() todo: Todo;
+  @ViewChild('inputFisico') txtInputFisico: ElementRef
+
+  checkCompletado: FormControl;
+  txtnput: FormControl;
+
+  editando: boolean = false //para controlar el doble click de un elemnto
+
+  ngOnInit(): void {
+
+    this.checkCompletado = new FormControl(this.todo.completado); //miramos el toggle del completado
+    this.txtnput = new FormControl(this.todo.texto, Validators.required); //el texto debe ser requerido al editar
+  }
+
+  //se activa con doble click y selecciona todo el texto
+  editar(){
+    this.editando = true
+
+    setTimeout(() => {
+      this.txtInputFisico.nativeElement.select()
+    }, 1)
+
+  }
+
+  //termina la edición seteando el editado en false, y se usa blur para desactiva la edicion del doble click
+  terminarEdicion(){
+    this.editando = false
+  }
+}

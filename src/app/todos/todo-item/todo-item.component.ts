@@ -1,6 +1,9 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Todo } from '../models/todo.model';
 import { FormControl, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/app.reducer';
+import * as actions  from '../todo.actions';
 
 @Component({
   selector: 'app-todo-item',
@@ -15,11 +18,15 @@ export class TodoItemComponent implements OnInit {
   txtnput: FormControl;
 
   editando: boolean = false //para controlar el doble click de un elemnto
-
+constructor(private store: Store<AppState>){}
   ngOnInit(): void {
 
     this.checkCompletado = new FormControl(this.todo.completado); //miramos el toggle del completado
     this.txtnput = new FormControl(this.todo.texto, Validators.required); //el texto debe ser requerido al editar
+
+    this.checkCompletado.valueChanges.subscribe( valor => {
+      this.store.dispatch(actions.toggle({id: this.todo.id}))
+    })
   }
 
   //se activa con doble click y selecciona todo el texto
